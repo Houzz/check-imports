@@ -1,6 +1,6 @@
 {
-  "name": "check-imports",
-  "version": "0.1.12",
+  "name": "@ivymark/check-imports",
+  "version": "0.1.12-1",
   "description": "Checks imports and updates package.json dependencies",
   "main": "./api/index.js",
   "bin": {
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/finom/check-imports"
+    "url": "https://github.com/ivymark/check-imports"
   },
   "dependencies": {
     "@babel/parser": "^7.5.5",
