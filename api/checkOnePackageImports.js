@@ -12,6 +12,7 @@ async function checkOnePackageImports({
   update,
   throwError,
   log,
+  ignoreImports,
 }) {
   const result = {
     existing: [],
@@ -126,24 +127,13 @@ async function checkOnePackageImports({
   }
 
   for (const [dependency, version] of Object.entries(oldDependencies)) {
-    if (!(dependency in pkg.dependencies)) {
+    if (!(dependency in pkg.dependencies) && !ignoreImports.includes(dependency)) {
       result.removed.push({
         dependency,
         version,
         ignore: false,
         type: 'dependencies',
       });
-    }
-  }
-
-  if (throwError) {
-    if (result.added.length) {
-      throw new Error(`Scripts relative to ${packagePath} has ${result.added.length} missing dependencies (${result.added.map(({ dependency }) => dependency).join(', ')})`);
-    }
-
-
-    if (result.removed.length) {
-      throw new Error(`${packagePath} includes ${result.removed.length} dependencies to remove (${result.added.map(({ dependency }) => dependency).join(', ')})`);
     }
   }
 

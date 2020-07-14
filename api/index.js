@@ -11,6 +11,7 @@ async function checkImports({
   throwError = false,
   log = false,
   babelPlugins = null,
+  ignoreImports,
 } = {}) {
   const groupedDependencies = await getGroupedDependencies({
     directoryPath, ignorePath, babelPlugins, throwError, log,
@@ -26,6 +27,7 @@ async function checkImports({
       update,
       throwError,
       log,
+      ignoreImports,
     });
 
     results.push({ packagePath, dependencies, result });

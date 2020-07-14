@@ -30,6 +30,7 @@ async function run({
     processManually(dependency) {
       return !ignoreImports.includes(dependency);
     },
+    ignoreImports
   });
 }
 
