@@ -21,6 +21,19 @@ async function checkOnePackageImports({
     ignored: [],
   };
 
+  let index = dependencies.indexOf('ivy-core');
+  if (index > -1) {
+    dependencies[index] = '@ivymark/ivy-core';
+  }
+  index = dependencies.indexOf('ivy-shared-components');
+  if (index > -1) {
+    dependencies[index] = '@ivymark/ivy-shared-components';
+  }
+  index = dependencies.indexOf('ivy-currency-calculations');
+  if (index > -1) {
+    dependencies[index] = '@ivymark/ivy-currency-calculations';
+  }
+
   const addExisting = (dependency, version, type) => result.existing.push({
     dependency, version, type, ignore: false,
   });
