@@ -1,10 +1,10 @@
 {
   "name": "@ivymark/check-imports",
-  "version": "0.1.12-2",
+  "version": "0.1.12-3",
   "description": "Checks imports and updates package.json dependencies",
   "main": "./api/index.js",
   "bin": {
-    "check-imports": "./cli.js"
+    "check-imports-ivy": "./cli.js"
   },
   "scripts": {
     "test": "node test",
