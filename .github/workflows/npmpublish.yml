@@ -1,0 +1,53 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Publish Package
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  npm_publish:
+    if: "! contains(toJSON(github.event.commits.*.message), '[Version Bump]')"
+    name: NPM Publish
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.HOUZZ_CI_TOKEN }}
+      - name: Setup GIT
+        run: |
+          git config user.email "houzz-ci@users.noreply.github.com"
+          git config user.name "houzz-ci"
+      - name: Bump up patch version and push to github
+        run: |
+          npm version patch -m "[Version Bump] %s"
+          git push "https://github.com/$GITHUB_REPOSITORY" master --no-verify --tags
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.HOUZZ_CI_TOKEN }}
+          github_access_token: ${{ secrets.HOUZZ_CI_TOKEN }}
+
+      - uses: actions/setup-node@v1
+        name: Build package
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://npm.pkg.github.com/
+          scope: houzz
+      - run: |
+          npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.HOUZZ_CI_TOKEN }}
+          github_access_token: ${{ secrets.HOUZZ_CI_TOKEN }}
+      - name: Publish package to github registry
+        run: |
+          npm publish --tag "latest" > publish_message.txt
+          echo "##[set-output name=message;]$(cat publish_message.txt)"
+        id: publish_package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.HOUZZ_CI_TOKEN }}
+          github_access_token: ${{ secrets.HOUZZ_CI_TOKEN }}
