@@ -10,7 +10,6 @@ async function checkOnePackageImports({
   dependencies,
   processManually,
   update,
-  throwError,
   log,
   ignoreImports,
 }) {

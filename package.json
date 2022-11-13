@@ -1,5 +1,5 @@
 {
-  "name": "@ivymark/check-imports",
+  "name": "@houzz/check-imports",
   "version": "0.1.14",
   "description": "Checks imports and updates package.json dependencies",
   "main": "./api/index.js",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ivymark/check-imports"
+    "url": "https://github.com/houzz/check-imports"
   },
   "dependencies": {
     "@babel/parser": "^7.5.5",
