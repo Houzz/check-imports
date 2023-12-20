@@ -1,6 +1,6 @@
 {
   "name": "@houzz/check-imports",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Checks imports and updates package.json dependencies",
   "main": "./api/index.js",
   "bin": {
