@@ -12,7 +12,7 @@ async function getGroupedDependencies({
   throwError,
   log,
 }) {
-  const filePaths = await glob(path.resolve(directoryPath, '**/*.{ts,js,jsx}'), {
+  const filePaths = await glob(path.resolve(directoryPath, '**/*.{ts,tsx,js,jsx}'), {
     ignore: [
       '**/node_modules/**',
       ...(typeof ignorePath === 'string' ? [ignorePath] : ignorePath)],
